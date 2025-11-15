@@ -1,0 +1,106 @@
+[
+  {
+    "category": "Minerals",
+    "product": "Steam Coal",
+    "description": "High-quality steam coal for power generation",
+    "origin": "Nigeria",
+    "moq": "5,000 MT",
+    "monthlyCapacity": "10,000 MT"
+  },
+  {
+    "category": "Minerals",
+    "product": "Coking Coal",
+    "description": "Metallurgical grade coking coal",
+    "origin": "Nigeria",
+    "moq": "5,000 MT",
+    "monthlyCapacity": "5,000 MT"
+  },
+  {
+    "category": "Agriculture",
+    "product": "Rice Husk",
+    "description": "Clean, dried rice husk for industrial use",
+    "origin": "Nigeria",
+    "moq": "500 MT",
+    "monthlyCapacity": "3,000 MT"
+  },
+  {
+    "category": "Agriculture",
+    "product": "Cassava Leaf Protein",
+    "description": "High-protein cassava leaf meal",
+    "origin": "Nigeria",
+    "moq": "100 MT",
+    "monthlyCapacity": "500 MT"
+  },
+  {
+    "category": "Agriculture",
+    "product": "White Sesame Seeds",
+    "description": "Premium white sesame seeds",
+    "origin": "Nigeria",
+    "moq": "50 MT",
+    "monthlyCapacity": "500 MT"
+  },
+  {
+    "category": "Agriculture",
+    "product": "Mixed Sesame Seeds",
+    "description": "Mixed grade sesame seeds",
+    "origin": "Nigeria",
+    "moq": "50 MT",
+    "monthlyCapacity": "500 MT"
+  },
+  {
+    "category": "Agriculture",
+    "product": "Ginger (Split)",
+    "description": "Dried split ginger for export",
+    "origin": "Nigeria",
+    "moq": "50 MT",
+    "monthlyCapacity": "300 MT"
+  },
+  {
+    "category": "Agriculture",
+    "product": "Ginger (Whole)",
+    "description": "Dried whole ginger root",
+    "origin": "Nigeria",
+    "moq": "50 MT",
+    "monthlyCapacity": "300 MT"
+  },
+  {
+    "category": "Agriculture",
+    "product": "Cocoa Beans",
+    "description": "Premium quality cocoa beans",
+    "origin": "Nigeria",
+    "moq": "100 MT",
+    "monthlyCapacity": "800 MT"
+  },
+  {
+    "category": "Biomass",
+    "product": "Rice Husk Ash",
+    "description": "High silica content rice husk ash",
+    "origin": "Nigeria",
+    "moq": "200 MT",
+    "monthlyCapacity": "1,000 MT"
+  },
+  {
+    "category": "Biomass",
+    "product": "Palm Kernel Shell (PKS)",
+    "description": "Dried palm kernel shell for biomass energy",
+    "origin": "Nigeria",
+    "moq": "500 MT",
+    "monthlyCapacity": "5,000 MT"
+  },
+  {
+    "category": "Biomass",
+    "product": "Coconut Shell Charcoal",
+    "description": "Premium coconut shell charcoal",
+    "origin": "Nigeria",
+    "moq": "100 MT",
+    "monthlyCapacity": "800 MT"
+  },
+  {
+    "category": "Biomass",
+    "product": "Biochar",
+    "description": "Carbon-rich biochar for soil amendment",
+    "origin": "Nigeria",
+    "moq": "100 MT",
+    "monthlyCapacity": "500 MT"
+  }
+]

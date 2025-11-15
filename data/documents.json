@@ -1,0 +1,44 @@
+[
+  {
+    "id": "doc1",
+    "title": "Coal Mining Operations Overview",
+    "description": "High-level overview of coal mining operations and management",
+    "path": "/documents/GnArmy+Capital+and+Management+Ltd+-+Coal+Mining+Operations (1).pdf",
+    "category": "Corporate"
+  },
+  {
+    "id": "doc2",
+    "title": "INYI-BLOCK SPA",
+    "description": "SPA documentation for INYI-BLOCK",
+    "path": "/documents/INYI-BLOCK _SPA.pdf",
+    "category": "Compliance"
+  },
+  {
+    "id": "doc3",
+    "title": "Rice Husk Biomass Overview",
+    "description": "Technical overview of rice husk biomass applications",
+    "path": "/documents/Overview of Rice Husk Biomass....pdf",
+    "category": "Technical"
+  },
+  {
+    "id": "doc4",
+    "title": "Power Plant Financial Overview",
+    "description": "Financial analysis and overview of power plant operations",
+    "path": "/documents/Power Plant Financial Overview.pdf",
+    "category": "Finance"
+  },
+  {
+    "id": "doc5",
+    "title": "Sample Result",
+    "description": "Example testing result document",
+    "path": "/documents/SAMPLE RESULT.pdf",
+    "category": "Quality"
+  },
+  {
+    "id": "doc6",
+    "title": "Subsidized Raw Protein",
+    "description": "Information on subsidized raw protein products",
+    "path": "/documents/Subsidized Raw Protein.pdf",
+    "category": "Products"
+  }
+]
