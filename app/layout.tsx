@@ -17,6 +17,11 @@ export const metadata: Metadata = {
     description: 'Powering Industries. Feeding Nations. Exporting Excellence.',
     type: 'website',
   },
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({
