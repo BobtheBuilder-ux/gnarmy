@@ -118,6 +118,9 @@ export function Footer() {
             <p className="text-white/60 text-sm">
               100% Indigenous Nigerian Company
             </p>
+            <p className="text-white/60 text-sm text-center md:text-left">
+              Ajoo Management and Consultancy Ltd (Subsidiary of GNARMY COAL TRADE AND CONSULTANCY LTD)
+            </p>
           </div>
         </div>
       </div>
