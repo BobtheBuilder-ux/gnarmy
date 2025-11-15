@@ -45,7 +45,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: 'Email',
-      content: 'aoconsult.mgn@outlook.com',
+      content: 'info@gnarnyco.com',
     },
     {
       icon: Clock,
