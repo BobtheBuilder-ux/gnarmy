@@ -21,9 +21,14 @@ export function Navigation() {
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-              <span className="text-white font-bold text-xl">G</span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Gnarmy logo"
+              width={40}
+              height={40}
+              loading="lazy"
+              className="h-10 w-auto object-contain"
+            />
             <div>
               <div className="font-display font-bold text-xl text-foreground">Gnarmy</div>
               <div className="text-xs text-muted-foreground">Coal Trade & Consultancy</div>
