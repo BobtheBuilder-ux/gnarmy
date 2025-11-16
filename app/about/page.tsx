@@ -268,7 +268,7 @@ export default function AboutPage() {
           <Card className="border-none shadow-lg">
             <CardContent className="p-8 md:p-12">
               <div className="grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-1 flex flex-col items-center">
+                {/* <div className="md:col-span-1 flex flex-col items-center">
                   <img
                     src="/director.jpeg"
                     alt="Director, Alloysius Chijioke Tabansi"
@@ -277,7 +277,7 @@ export default function AboutPage() {
                     loading="lazy"
                     className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 object-cover rounded-lg shadow-md border border-border mb-4"
                   />
-                </div>
+                </div> */}
 
                 <div className="md:col-span-2">
                   <h3 className="text-2xl md:text-3xl font-bold mb-2">ALLOYSIUS CHIJIOKE TABANSI</h3>
