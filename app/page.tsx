@@ -150,6 +150,36 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* Live Coal Price Section */}
+      <Section className="bg-muted/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">Market Snapshot</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Live coal commodity pricing to support informed decisions.
+          </p>
+        </motion.div>
+        <div className="max-w-5xl mx-auto">
+          {/* ErrorBoundary wraps chart for robustness */}
+          <div>
+            {/* Import locally to avoid SSR issues */}
+            {(() => {
+              const CoalChart = require('@/components/CoalChart').default;
+              const ErrorBoundary = require('@/components/ErrorBoundary').default;
+              return (
+                <ErrorBoundary>
+                  <CoalChart title="Coal Price (Live)" />
+                </ErrorBoundary>
+              );
+            })()}
+          </div>
+        </div>
+      </Section>
+
       <Section className="bg-primary text-white">
         <div className="text-center max-w-3xl mx-auto">
           <motion.div

@@ -32,11 +32,11 @@ export default function ContactPage() {
   };
 
   const contactInfo = [
-    {
-      icon: MapPin,
-      title: 'Address',
-      content: '36 Akwa Crescent, Gwarinpa, Abuja, FCT, Nigeria',
-    },
+    // {
+    //   icon: MapPin,
+    //   title: 'Address',
+    //   content: '36 Akwa Crescent, Gwarinpa, Abuja, FCT, Nigeria',
+    // },
     {
       icon: Phone,
       title: 'Phone',

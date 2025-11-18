@@ -209,6 +209,34 @@ Financial Inclusion:
         </div>
       </Section>
 
+      {/* Live Coal Price for Mining Section */}
+      <Section id="mining-price" className="bg-muted/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">Mining Market Update</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Live coal price tracking aligned with our mining operations.
+          </p>
+        </motion.div>
+        <div className="max-w-5xl mx-auto">
+          <div>
+            {(() => {
+              const CoalChart = require('@/components/CoalChart').default;
+              const ErrorBoundary = require('@/components/ErrorBoundary').default;
+              return (
+                <ErrorBoundary>
+                  <CoalChart title="Coal Price (Live)" />
+                </ErrorBoundary>
+              );
+            })()}
+          </div>
+        </div>
+      </Section>
+
       <Section className="bg-muted/30">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

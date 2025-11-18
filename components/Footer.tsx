@@ -74,10 +74,10 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-6">Contact Info</h3>
             <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
+              {/* <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-white/70 text-sm">36 Akwa Crescent, Gwarinpa, Abuja, Nigeria</span>
-              </li>
+              </li> */}
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0" />
                 <span className="text-white/70 text-sm">+234 816 744 9552</span>
