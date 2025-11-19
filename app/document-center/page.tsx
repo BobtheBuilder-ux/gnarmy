@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/Hero';
 import { Section } from '@/components/Section';
@@ -23,6 +23,37 @@ interface Document {
 
 export default function DocumentCenterPage() {
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
+  const [availableDocs, setAvailableDocs] = useState<Document[]>([]);
+  const [docsLoading, setDocsLoading] = useState<boolean>(true);
+
+  // Filter to only PDFs that actually exist in /public/documents
+  useEffect(() => {
+    let cancelled = false;
+    const checkAvailability = async () => {
+      setDocsLoading(true);
+      try {
+        const checks = await Promise.all(
+          documentsData.map(async (doc) => {
+            try {
+              const res = await fetch(doc.path, { method: 'HEAD' });
+              return res.ok ? doc : null;
+            } catch {
+              return null;
+            }
+          })
+        );
+        if (!cancelled) {
+          setAvailableDocs(checks.filter(Boolean) as Document[]);
+        }
+      } finally {
+        if (!cancelled) setDocsLoading(false);
+      }
+    };
+    checkAvailability();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <>
@@ -61,19 +92,25 @@ export default function DocumentCenterPage() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {documentsData.map((doc, index) => (
-            <PdfThumbnail
-              key={doc.id}
-              file={doc.path}
-              title={doc.title}
-              description={doc.description}
-              category={doc.category}
-              onView={() => setSelectedDocument(doc)}
-              index={index}
-            />
-          ))}
-        </div>
+        {docsLoading ? (
+          <div className="text-center text-muted-foreground">Loading available documents…</div>
+        ) : availableDocs.length === 0 ? (
+          <div className="text-center text-muted-foreground">No documents available at the moment.</div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {availableDocs.map((doc, index) => (
+              <PdfThumbnail
+                key={doc.id}
+                file={doc.path}
+                title={doc.title}
+                description={doc.description}
+                category={doc.category}
+                onView={() => setSelectedDocument(doc)}
+                index={index}
+              />
+            ))}
+          </div>
+        )}
       </Section>
 
       <Section>
