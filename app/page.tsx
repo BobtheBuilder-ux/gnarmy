@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Hero } from '@/components/Hero';
 import { Section } from '@/components/Section';
 import { FeatureCard } from '@/components/FeatureCard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import {
   Building2,
   Globe,
@@ -19,6 +21,7 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
+  const CoalChart = dynamic(() => import('@/components/CoalChart'), { ssr: false });
   const highlights = [
     {
       icon: Building2,
@@ -165,18 +168,11 @@ export default function HomePage() {
         </motion.div>
         <div className="max-w-5xl mx-auto">
           {/* ErrorBoundary wraps chart for robustness */}
-          {/** @ts-expect-error Server/Client boundary type resolution */}
           <div>
-            {/* Import locally to avoid SSR issues */}
-            {(() => {
-              const CoalChart = require('@/components/CoalChart').default;
-              const ErrorBoundary = require('@/components/ErrorBoundary').default;
-              return (
-                <ErrorBoundary>
-                  <CoalChart title="Coal Price (Live)" />
-                </ErrorBoundary>
-              );
-            })()}
+            {/* Dynamically import chart to avoid SSR issues */}
+            <ErrorBoundary>
+              <CoalChart title="Coal Price (Live)" />
+            </ErrorBoundary>
           </div>
         </div>
       </Section>

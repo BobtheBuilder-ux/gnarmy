@@ -1,13 +1,16 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { Hero } from '@/components/Hero';
 import { Section } from '@/components/Section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
 import { Mountain, Wheat, Leaf, Settings, Truck, Award } from 'lucide-react';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 export default function ServicesPage() {
+  const CoalChart = dynamic(() => import('@/components/CoalChart'), { ssr: false });
   const services = [
     {
       id: 'mining',
@@ -223,17 +226,10 @@ Financial Inclusion:
           </p>
         </motion.div>
         <div className="max-w-5xl mx-auto">
-          {/** @ts-expect-error Server/Client boundary type resolution */}
           <div>
-            {(() => {
-              const CoalChart = require('@/components/CoalChart').default;
-              const ErrorBoundary = require('@/components/ErrorBoundary').default;
-              return (
-                <ErrorBoundary>
-                  <CoalChart title="Coal Price (Live)" />
-                </ErrorBoundary>
-              );
-            })()}
+            <ErrorBoundary>
+              <CoalChart title="Coal Price (Live)" />
+            </ErrorBoundary>
           </div>
         </div>
       </Section>

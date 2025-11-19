@@ -12,7 +12,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import PropTypes from "prop-types";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend);
 
@@ -129,7 +128,12 @@ export function CoalChart({
           legend: { display: false },
           tooltip: {
             callbacks: {
-              label: (ctx) => `Price: ${formatPrice.format(ctx.parsed.y)}`,
+              label: (ctx) => {
+                const y = ctx.parsed?.y;
+                return typeof y === "number" && Number.isFinite(y)
+                  ? `Price: ${formatPrice.format(y)}`
+                  : "Price: —";
+              },
             },
           },
         },
@@ -231,11 +235,5 @@ export function CoalChart({
     </section>
   );
 }
-
-CoalChart.propTypes = {
-  title: PropTypes.string,
-  refreshIntervalMs: PropTypes.number,
-  className: PropTypes.string,
-};
 
 export default CoalChart;
