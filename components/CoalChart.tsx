@@ -53,8 +53,6 @@ export function CoalChart({
     () => new Intl.NumberFormat(undefined, { style: "decimal", minimumFractionDigits: 2, maximumFractionDigits: 2 }),
     []
   );
-  // Helper to ensure we only ever pass a number to the formatter
-  const formatNumber = (value: number): string => formatPrice.format(value);
 
   const fetchCoalPrice = useCallback(async () => {
     setLoading(true);
@@ -131,10 +129,7 @@ export function CoalChart({
           legend: { display: false },
           tooltip: {
             callbacks: {
-              label: (ctx) => {
-                const y = Number((ctx as any)?.parsed?.y ?? NaN);
-                return Number.isFinite(y) ? `Price: ${formatNumber(y)}` : "Price: —";
-              },
+              label: (ctx) => `Price: ${formatPrice.format(ctx.parsed.y)}`,
             },
           },
         },
@@ -203,9 +198,7 @@ export function CoalChart({
       <div className="grid md:grid-cols-3 gap-6 mb-4">
         <div className="md:col-span-1">
           <div className="text-sm text-muted-foreground">Current Price</div>
-          <div className="text-2xl font-bold">
-            {typeof currentPrice === 'number' && Number.isFinite(currentPrice) ? formatNumber(currentPrice) : "—"}
-          </div>
+          <div className="text-2xl font-bold">{currentPrice != null ? formatPrice.format(currentPrice) : "—"}</div>
         </div>
         <div className="md:col-span-1">
           <div className="text-sm text-muted-foreground">Change (vs previous)</div>

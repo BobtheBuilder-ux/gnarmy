@@ -165,6 +165,7 @@ export default function HomePage() {
         </motion.div>
         <div className="max-w-5xl mx-auto">
           {/* ErrorBoundary wraps chart for robustness */}
+          {/** @ts-expect-error Server/Client boundary type resolution */}
           <div>
             {/* Import locally to avoid SSR issues */}
             {(() => {

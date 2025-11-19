@@ -223,6 +223,7 @@ Financial Inclusion:
           </p>
         </motion.div>
         <div className="max-w-5xl mx-auto">
+          {/** @ts-expect-error Server/Client boundary type resolution */}
           <div>
             {(() => {
               const CoalChart = require('@/components/CoalChart').default;
