@@ -6,7 +6,7 @@ import { Hero } from '@/components/Hero';
 import { Section } from '@/components/Section';
 import { Modal } from '@/components/Modal';
 import { motion } from 'framer-motion';
-import documentsData from '@/data/documents.json';
+// Fetch dynamic document list from server to reflect actual files in /public/documents
 import videosData from '@/data/videos.json';
 
 const PdfThumbnail = dynamic(() => import('@/components/PdfThumbnail').then(mod => ({ default: mod.PdfThumbnail })), { ssr: false });
@@ -26,30 +26,23 @@ export default function DocumentCenterPage() {
   const [availableDocs, setAvailableDocs] = useState<Document[]>([]);
   const [docsLoading, setDocsLoading] = useState<boolean>(true);
 
-  // Filter to only PDFs that actually exist in /public/documents
+  // Load documents via API to include any newly added files automatically
   useEffect(() => {
     let cancelled = false;
-    const checkAvailability = async () => {
+    const loadDocs = async () => {
       setDocsLoading(true);
       try {
-        const checks = await Promise.all(
-          documentsData.map(async (doc) => {
-            try {
-              const res = await fetch(doc.path, { method: 'HEAD' });
-              return res.ok ? doc : null;
-            } catch {
-              return null;
-            }
-          })
-        );
-        if (!cancelled) {
-          setAvailableDocs(checks.filter(Boolean) as Document[]);
-        }
+        const res = await fetch('/api/documents', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Failed to load documents: ${res.status}`);
+        const items = await res.json();
+        if (!cancelled) setAvailableDocs(items);
+      } catch (e) {
+        if (!cancelled) setAvailableDocs([]);
       } finally {
         if (!cancelled) setDocsLoading(false);
       }
     };
-    checkAvailability();
+    loadDocs();
     return () => {
       cancelled = true;
     };
