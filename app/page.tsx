@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { Hero } from '@/components/Hero';
 import { Section } from '@/components/Section';
 import { FeatureCard } from '@/components/FeatureCard';
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import CoalPriceChart from '@/components/CoalPriceChart';
 import {
   Building2,
   Globe,
@@ -21,7 +22,6 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
-  const CoalChart = dynamic(() => import('@/components/CoalChart'), { ssr: false });
   const highlights = [
     {
       icon: Building2,
@@ -153,7 +153,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Live Coal Price Section */}
+      {/* Coal Price Section */}
       <Section className="bg-muted/30">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -161,20 +161,18 @@ export default function HomePage() {
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">Market Snapshot</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Live coal commodity pricing to support informed decisions.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">Coal Price</h2>
+          {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Manually maintained coal price for operational planning.
+          </p> */}
         </motion.div>
-        <div className="max-w-5xl mx-auto">
-          {/* ErrorBoundary wraps chart for robustness */}
-          <div>
-            {/* Dynamically import chart to avoid SSR issues */}
-            <ErrorBoundary>
-              <CoalChart title="Coal Price (Live)" />
-            </ErrorBoundary>
-          </div>
-        </div>
+        {/* <div className="max-w-5xl mx-auto">
+          <HomeCoalPriceCard />
+        </div> */}
+
+         <ErrorBoundary>
+            <CoalPriceChart />
+          </ErrorBoundary>
       </Section>
 
       <Section className="bg-primary text-white">
@@ -254,5 +252,57 @@ export default function HomePage() {
         </div>
       </Section>
     </>
+  );
+}
+
+function HomeCoalPriceCard() {
+  const [price, setPrice] = useState<number | null>(null);
+  const [time, setTime] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch('/api/coal', { cache: 'no-store' });
+        const json = await res.json();
+        if (!cancelled) {
+          setPrice(typeof json?.price === 'number' ? json.price : null);
+          setTime(json?.time || null);
+        }
+      } catch (e: any) {
+        if (!cancelled) setError('Failed to load price');
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <Card className="border-none shadow-lg">
+      <CardContent className="p-6">
+        <div className="grid md:grid-cols-3 gap-6 items-center">
+          <div>
+            <div className="text-sm text-muted-foreground">Current Price</div>
+            <div className="text-2xl font-bold">{price != null ? price.toFixed(2) : '—'}</div>
+          </div>
+          <div>
+            <div className="text-sm text-muted-foreground">Last Updated</div>
+            <div className="text-sm">{time || '—'}</div>
+          </div>
+          <div className="flex justify-end">
+            {loading && <span className="text-muted-foreground">Loading…</span>}
+            {error && <span className="text-destructive">{error}</span>}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

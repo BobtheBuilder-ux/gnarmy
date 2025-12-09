@@ -1,16 +1,16 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { Hero } from '@/components/Hero';
 import { Section } from '@/components/Section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { Mountain, Wheat, Leaf, Settings, Truck, Award } from 'lucide-react';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import CoalPriceChart from '@/components/CoalPriceChart';
 
 export default function ServicesPage() {
-  const CoalChart = dynamic(() => import('@/components/CoalChart'), { ssr: false });
   const services = [
     {
       id: 'mining',
@@ -212,7 +212,7 @@ Financial Inclusion:
         </div>
       </Section>
 
-      {/* Live Coal Price for Mining Section */}
+      {/* Coal Price for Mining Section */}
       <Section id="mining-price" className="bg-muted/30">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -220,17 +220,16 @@ Financial Inclusion:
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">Mining Market Update</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Live coal price tracking aligned with our mining operations.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">Coal Market Update</h2>
+          {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Manually maintained coal price aligned with our mining operations.
+          </p> */}
         </motion.div>
-        <div className="max-w-5xl mx-auto">
-          <div>
-            <ErrorBoundary>
-              <CoalChart title="Coal Price (Live)" />
-            </ErrorBoundary>
-          </div>
+        <div className="max-w-6xl mx-auto space-y-8">
+          {/* <ServicesCoalPriceCard /> */}
+          <ErrorBoundary>
+            <CoalPriceChart />
+          </ErrorBoundary>
         </div>
       </Section>
 
@@ -288,5 +287,57 @@ Financial Inclusion:
         </motion.div>
       </Section>
     </>
+  );
+}
+
+function ServicesCoalPriceCard() {
+  const [price, setPrice] = useState<number | null>(null);
+  const [time, setTime] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch('/api/coal', { cache: 'no-store' });
+        const json = await res.json();
+        if (!cancelled) {
+          setPrice(typeof json?.price === 'number' ? json.price : null);
+          setTime(json?.time || null);
+        }
+      } catch (e: any) {
+        if (!cancelled) setError('Failed to load price');
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <Card className="border-none shadow-lg">
+      <CardContent className="p-6">
+        <div className="grid md:grid-cols-3 gap-6 items-center">
+          <div>
+            <div className="text-sm text-muted-foreground">Current Price</div>
+            <div className="text-2xl font-bold">{price != null ? price.toFixed(2) : '—'}</div>
+          </div>
+          <div>
+            <div className="text-sm text-muted-foreground">Last Updated</div>
+            <div className="text-sm">{time || '—'}</div>
+          </div>
+          <div className="flex justify-end">
+            {loading && <span className="text-muted-foreground">Loading…</span>}
+            {error && <span className="text-destructive">{error}</span>}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

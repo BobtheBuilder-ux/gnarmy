@@ -1,45 +1,69 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { promises as fs } from 'fs';
+import path from 'path';
+import { verifySession } from '@/lib/auth';
+
+const DATA_DIR = path.join(process.cwd(), 'data');
+const PRICE_FILE = path.join(DATA_DIR, 'coal.json');
+const HISTORY_FILE = path.join(DATA_DIR, 'coal-history.json');
+
+async function ensureData() {
+  await fs.mkdir(DATA_DIR, { recursive: true });
+  try {
+    await fs.access(PRICE_FILE);
+  } catch {
+    await fs.writeFile(PRICE_FILE, JSON.stringify({ name: 'Coal', price: null, time: null }));
+  }
+  try {
+    await fs.access(HISTORY_FILE);
+  } catch {
+    await fs.writeFile(HISTORY_FILE, JSON.stringify([]));
+  }
+}
 
 export async function GET() {
-  const clientId =
-    process.env.TE_CLIENT_ID || process.env.NEXT_PUBLIC_TE_CLIENT_ID || 'bb79912b577e42a';
-  const clientSecret =
-    process.env.TE_CLIENT_SECRET || process.env.NEXT_PUBLIC_TE_CLIENT_SECRET || 'twh2u8ixra49rz4';
+  await ensureData();
+  const buf = await fs.readFile(PRICE_FILE, 'utf8');
+  const json = JSON.parse(buf);
+  return NextResponse.json(json);
+}
 
-  const url = `https://api.tradingeconomics.com/markets/commodities?client=${clientId}&client_secret=${clientSecret}`;
+const schema = z.object({ price: z.number().finite().positive() });
 
-  try {
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) {
-      return NextResponse.json(
-        { error: `Upstream error: ${res.status} ${res.statusText}` },
-        { status: 502 }
-      );
-    }
+export async function POST(req: NextRequest) {
+  await ensureData();
+  const secret = process.env.AUTH_SECRET || 'dev-secret';
+  const token = req.cookies.get('session')?.value || '';
+  const session = token ? await verifySession(token, secret) : null;
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const data = await res.json();
-    if (!Array.isArray(data)) {
-      return NextResponse.json({ error: 'Unexpected upstream response' }, { status: 500 });
-    }
+  const body = await req.json().catch(() => null);
+  const parsed = schema.safeParse(body);
+  if (!parsed.success) return NextResponse.json({ error: 'Invalid price' }, { status: 400 });
 
-    const coal = data.find(
-      (item: any) => typeof item?.name === 'string' && item.name.toLowerCase() === 'coal'
-    );
-    if (!coal) {
-      return NextResponse.json({ error: 'Coal not found' }, { status: 404 });
-    }
+  const { price } = parsed.data;
+  const time = new Date().toISOString();
+  const current = { name: 'Coal', price, time };
+  await fs.writeFile(PRICE_FILE, JSON.stringify(current));
 
-    const price: number = Number(coal?.last ?? coal?.close ?? coal?.price ?? NaN);
-    if (!Number.isFinite(price)) {
-      return NextResponse.json({ error: 'Invalid price' }, { status: 500 });
-    }
+  const histBuf = await fs.readFile(HISTORY_FILE, 'utf8');
+  const history = JSON.parse(histBuf) as Array<{ id?: string; price: number; time: string; user: string }>;
+  const id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  history.push({ id, price, time, user: session.username });
+  await fs.writeFile(HISTORY_FILE, JSON.stringify(history));
 
-    const time = new Date().toISOString();
-    return NextResponse.json({ name: 'Coal', price, time });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message ?? 'Failed to fetch coal data' },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json(current);
+}
+
+export async function DELETE(req: NextRequest) {
+  await ensureData();
+  const secret = process.env.AUTH_SECRET || 'dev-secret';
+  const token = req.cookies.get('session')?.value || '';
+  const session = token ? await verifySession(token, secret) : null;
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  const cleared = { name: 'Coal', price: null, time: null };
+  await fs.writeFile(PRICE_FILE, JSON.stringify(cleared));
+  return NextResponse.json(cleared);
 }
