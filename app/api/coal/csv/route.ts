@@ -12,7 +12,7 @@ function parseMonth(m: string) {
 }
 
 export async function GET() {
-  const csvPath = process.env.COAL_CSV_PATH || '/Users/Bobbieberry/Downloads/Coal_prices__sample_.csv';
+  const csvPath = process.env.COAL_CSV_PATH || 'public/Coal_prices__sample_.csv';
   try {
     const raw = await fs.readFile(csvPath, 'utf8');
     const lines = raw.split(/\r?\n/).filter((l) => l.trim().length > 0);

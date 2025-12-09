@@ -1,0 +1,25 @@
+Month,Price_USD_per_ton,Source
+2023-12,141.82,"IndexMundi (Australian thermal coal, USD/ton)"
+2024-01,124.90,IndexMundi
+2024-02,124.22,IndexMundi
+2024-03,131.49,IndexMundi
+2024-04,134.97,IndexMundi
+2024-05,142.01,IndexMundi
+2024-06,135.10,IndexMundi
+2024-07,137.55,IndexMundi
+2024-08,145.76,IndexMundi
+2024-09,139.20,IndexMundi
+2024-10,146.63,IndexMundi
+2024-11,142.12,IndexMundi
+2024-12,129.81,IndexMundi
+2025-01,118.60,IndexMundi
+2025-02,106.93,IndexMundi
+2025-03,103.97,IndexMundi
+2025-04,98.61,IndexMundi
+2025-05,104.41,IndexMundi
+2025-06,109.03,IndexMundi
+2025-07,,Data not available from IndexMundi (see Investing.com for daily futures)
+2025-08,,Data not available from IndexMundi (see Investing.com for daily futures)
+2025-09,,Data not available from IndexMundi (see Investing.com for daily futures)
+2025-10,,Data not available from IndexMundi (see Investing.com for daily futures)
+2025-11,111.10,"Investing.com (Newcastle Coal futures — example month-end close Nov 28, 2025)"
