@@ -4,7 +4,9 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { verifySession } from '@/lib/auth';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+export const runtime = 'nodejs';
+
+const DATA_DIR = process.env.COAL_DATA_DIR || '/tmp/gnarmy-data';
 const PRICE_FILE = path.join(DATA_DIR, 'coal.json');
 const HISTORY_FILE = path.join(DATA_DIR, 'coal-history.json');
 
