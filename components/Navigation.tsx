@@ -64,7 +64,7 @@ export function Navigation() {
                           <Link href="/services#agriculture" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                             <div className="text-sm font-medium leading-none">Agriculture & Commodities</div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                              Rice husk, sesame, cocoa, ginger
+                              Rice husk, sesame, and cocoa products
                             </p>
                           </Link>
                         </NavigationMenuLink>

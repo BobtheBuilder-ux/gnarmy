@@ -61,7 +61,6 @@ Agriculture Value Chain Development
         'Rice Husk & Rice Husk Ash',
         'Cassava Leaf Protein',
         'Sesame Seeds (White & Mixed)',
-        'Ginger (Split & Whole)',
         'Cocoa Beans',
         'Quality Grading & Sorting',
       ],
@@ -73,7 +72,6 @@ Agriculture Value Chain Development
       description: 'Sustainable energy materials supporting global renewable initiatives',
       features: [
         'Palm Kernel Shell (PKS)',
-        'Coconut Shell Charcoal',
         'Biochar Production',
         'Rice Husk Ash (High Silica)',
         'Renewable Energy Applications',

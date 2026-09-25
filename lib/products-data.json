@@ -49,22 +49,6 @@
   },
   {
     "category": "Agriculture",
-    "product": "Ginger (Split)",
-    "description": "Dried split ginger for export",
-    "origin": "Nigeria",
-    "moq": "50 MT",
-    "monthlyCapacity": "300 MT"
-  },
-  {
-    "category": "Agriculture",
-    "product": "Ginger (Whole)",
-    "description": "Dried whole ginger root",
-    "origin": "Nigeria",
-    "moq": "50 MT",
-    "monthlyCapacity": "300 MT"
-  },
-  {
-    "category": "Agriculture",
     "product": "Cocoa Beans",
     "description": "Premium quality cocoa beans",
     "origin": "Nigeria",
@@ -86,14 +70,6 @@
     "origin": "Nigeria",
     "moq": "500 MT",
     "monthlyCapacity": "5,000 MT"
-  },
-  {
-    "category": "Biomass",
-    "product": "Coconut Shell Charcoal",
-    "description": "Premium coconut shell charcoal",
-    "origin": "Nigeria",
-    "moq": "100 MT",
-    "monthlyCapacity": "800 MT"
   },
   {
     "category": "Biomass",

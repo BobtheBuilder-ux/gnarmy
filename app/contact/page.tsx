@@ -16,7 +16,7 @@ import {
 import { motion } from 'framer-motion';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -43,9 +43,14 @@ export default function ContactPage() {
       content: '+234 816 744 9552',
     },
     {
+      icon: MessageCircle,
+      title: 'WhatsApp',
+      content: '+234 80 2 557 2196',
+    },
+    {
       icon: Mail,
       title: 'Email',
-      content: 'info@gnarnyco.com',
+      content: 'rowland@gnarmyco.com\ninfo@gnarmyco.com',
     },
     {
       icon: Clock,

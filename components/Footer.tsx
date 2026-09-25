@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Facebook, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
@@ -83,8 +83,16 @@ export function Footer() {
                 <span className="text-white/70 text-sm">+234 816 744 9552</span>
               </li>
               <li className="flex items-center space-x-3">
+                <MessageCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                <span className="text-white/70 text-sm">+234 80 2 557 2196</span>
+              </li>
+              <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/70 text-sm break-all">info@gnarnyco.com</span>
+                <span className="text-white/70 text-sm break-all">rowland@gnarmyco.com</span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                <span className="text-white/70 text-sm break-all">info@gnarmyco.com</span>
               </li>
             </ul>
           </div>
