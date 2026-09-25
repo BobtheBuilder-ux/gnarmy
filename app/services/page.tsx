@@ -130,7 +130,7 @@ Agriculture Value Chain Development
 • Target: Reaching the unbanked through accessible financial systems.
 • Services:
   o Micro and online financial systems.
-  o Provision of soft loans.
+  o Provision of soft loan.
 • Social Impact: A key focus on education, as well as youth inclusion in both agriculture and finance.
 
 Financial Inclusion:

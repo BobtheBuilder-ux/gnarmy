@@ -80,19 +80,19 @@ export function Footer() {
               </li> */}
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/70 text-sm">+234 816 744 9552</span>
+                <a href="tel:+2348167449552" className="text-white/70 text-sm hover:text-primary transition-colors">+234 816 744 9552</a>
               </li>
               <li className="flex items-center space-x-3">
                 <MessageCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/70 text-sm">+234 80 2 557 2196</span>
+                <a href="https://wa.me/2348025572196?text=Hello%20Gnarmy%20Coal" target="_blank" rel="noopener noreferrer" className="text-white/70 text-sm hover:text-primary transition-colors">+234 80 2 557 2196</a>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/70 text-sm break-all">rowland@gnarmyco.com</span>
+                <a href="mailto:rowland@gnarmyco.com" className="text-white/70 text-sm break-all hover:text-primary transition-colors">rowland@gnarmyco.com</a>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/70 text-sm break-all">info@gnarmyco.com</span>
+                <a href="mailto:info@gnarmyco.com" className="text-white/70 text-sm break-all hover:text-primary transition-colors">info@gnarmyco.com</a>
               </li>
             </ul>
           </div>

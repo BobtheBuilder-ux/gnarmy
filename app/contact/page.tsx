@@ -41,16 +41,19 @@ export default function ContactPage() {
       icon: Phone,
       title: 'Phone',
       content: '+234 816 744 9552',
+      href: 'tel:+2348167449552',
     },
     {
       icon: MessageCircle,
       title: 'WhatsApp',
-      content: '+234 80 2 557 2196',
+      content: '+234 802 557 2196',
+      href: 'https://wa.me/2348025572196?text=Hello%20Gnarmy%20Coal',
     },
     {
       icon: Mail,
       title: 'Email',
       content: 'rowland@gnarmyco.com\ninfo@gnarmyco.com',
+      href: 'mailto:info@gnarmyco.com',
     },
     {
       icon: Clock,
@@ -118,7 +121,18 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold mb-2">{info.title}</h3>
-                        <p className="text-muted-foreground whitespace-pre-line">{info.content}</p>
+                        {info.href ? (
+                          <a
+                            href={info.href}
+                            className="text-muted-foreground whitespace-pre-line underline-offset-4 hover:underline"
+                            target={info.href.startsWith('http') ? '_blank' : undefined}
+                            rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          >
+                            {info.content}
+                          </a>
+                        ) : (
+                          <p className="text-muted-foreground whitespace-pre-line">{info.content}</p>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
